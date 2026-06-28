@@ -131,7 +131,7 @@ Tichi-Automation/
 
 ### 1. Clone Repository
 ```bash
-git clone 
+git clone https://github.com/SANTHOSH478dev/Tichi-Automation-Files.git
 ```
 
 ### 2. Navigate to Project
@@ -190,7 +190,7 @@ mvn clean test
 
 ## 👨‍💻 Author
 
-**Nithish**  
+**Santhoshkumar M**
 QA Automation Engineer (Aspiring)  
 QA Final Report by: **Santhoshkumar M** — v1.0 | 28 June 2026
 
