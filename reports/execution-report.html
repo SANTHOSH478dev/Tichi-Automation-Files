@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tichi Automation — Execution Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #222; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: #fff; padding: 32px 40px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .sub { font-size: 13px; color: #a0b4d0; margin-top: 6px; }
+  .header .meta { display: flex; gap: 32px; margin-top: 18px; font-size: 13px; color: #cdd9e8; flex-wrap: wrap; }
+  .header .meta span b { color: #fff; }
+
+  /* Summary cards */
+  .cards { display: flex; gap: 16px; padding: 24px 40px; flex-wrap: wrap; }
+  .card { background: #fff; border-radius: 10px; padding: 18px 24px; flex: 1; min-width: 140px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: center; }
+  .card .num { font-size: 36px; font-weight: 700; line-height: 1; }
+  .card .lbl { font-size: 12px; color: #666; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card.total .num { color: #1a1a2e; }
+  .card.pass  .num { color: #16a34a; }
+  .card.fail  .num { color: #dc2626; }
+  .card.skip  .num { color: #d97706; }
+  .card.dur   .num { color: #2563eb; font-size: 26px; }
+
+  /* Progress bar */
+  .progress-wrap { padding: 0 40px 24px; }
+  .progress-bar { height: 10px; border-radius: 6px; background: #e5e7eb; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #16a34a 95.45%, #dc2626 95.45%); border-radius: 6px; }
+  .progress-label { font-size: 12px; color: #666; margin-top: 6px; }
+
+  /* Section */
+  .section { padding: 0 40px 30px; }
+  .section-title { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px;
+                   border-left: 4px solid #0f3460; padding-left: 10px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; background: #fff;
+          border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); font-size: 13px; }
+  thead tr { background: #1a1a2e; color: #fff; }
+  thead th { padding: 12px 14px; text-align: left; font-weight: 600; letter-spacing: 0.3px; }
+  tbody tr { border-bottom: 1px solid #f0f0f0; }
+  tbody tr:hover { background: #f8fafc; }
+  tbody td { padding: 11px 14px; vertical-align: middle; }
+  .tc-id { font-family: monospace; font-weight: 600; color: #0f3460; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge.pass { background: #dcfce7; color: #16a34a; }
+  .badge.fail { background: #fee2e2; color: #dc2626; }
+  .badge.high   { background: #fee2e2; color: #b91c1c; }
+  .badge.medium { background: #fef9c3; color: #92400e; }
+  .badge.low    { background: #dbeafe; color: #1d4ed8; }
+  .dur-cell { color: #555; font-family: monospace; font-size: 12px; }
+
+  /* Bug callout */
+  .bug-box { background: #fff; border-radius: 10px; border-left: 5px solid #dc2626;
+             padding: 18px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .bug-box h3 { color: #dc2626; font-size: 14px; margin-bottom: 10px; }
+  .bug-box table { box-shadow: none; border-radius: 0; }
+  .bug-box thead tr { background: #fee2e2; }
+  .bug-box thead th { color: #7f1d1d; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 20px; font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🚀 Tichi Automation — Test Execution Report</h1>
+  <div class="sub">Selenium WebDriver + TestNG | Page Object Model Framework</div>
+  <div class="meta">
+    <span><b>Date:</b> 28 June 2026</span>
+    <span><b>Reported By:</b> Santhoshkumar M</span>
+    <span><b>Environment:</b> Staging</span>
+    <span><b>Browser:</b> Chrome (Latest)</span>
+    <span><b>OS:</b> Windows 11</span>
+    <span><b>App URL:</b> https://tichi-app-webapp-stage.web.app</span>
+    <span><b>Version:</b> 1.0</span>
+  </div>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="cards">
+  <div class="card total"><div class="num">22</div><div class="lbl">Total Tests</div></div>
+  <div class="card pass"> <div class="num">21</div><div class="lbl">Passed</div></div>
+  <div class="card fail"> <div class="num">1</div> <div class="lbl">Failed</div></div>
+  <div class="card skip"> <div class="num">0</div> <div class="lbl">Skipped</div></div>
+  <div class="card dur">  <div class="num">2m 38s</div><div class="lbl">Total Duration</div></div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+  <div class="progress-label">Pass Rate: 95.45% &nbsp;|&nbsp; 21 passed, 1 failed out of 22 test cases</div>
+</div>
+
+<!-- SIGN UP TESTS -->
+<div class="section">
+  <div class="section-title">📋 Sign Up Test Cases — Suite 1</div>
+  <table>
+    <thead>
+      <tr>
+        <th>TC ID</th><th>Test Scenario</th><th>Module</th><th>Priority</th><th>Status</th><th>Duration</th><th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tc-id">TC-SU-01</td>
+        <td>Successful Registration with Valid Inputs</td>
+        <td>Sign Up</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">7.2s</td>
+        <td>Account created. Redirected to dashboard.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-02</td>
+        <td>Registration with Already Registered Email</td>
+        <td>Sign Up</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">4.8s</td>
+        <td>Error shown: email already registered.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-03</td>
+        <td>Registration with Invalid Email Format</td>
+        <td>Sign Up</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.5s</td>
+        <td>Inline error: Please enter a valid email address.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-04</td>
+        <td>Registration with All Fields Empty</td>
+        <td>Sign Up</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.9s</td>
+        <td>Validation errors on all required fields.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-05</td>
+        <td>Registration with Weak Password</td>
+        <td>Sign Up</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.1s</td>
+        <td>Password strength error displayed.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-06</td>
+        <td>Password and Confirm Password Mismatch</td>
+        <td>Sign Up</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.4s</td>
+        <td>Error: Passwords do not match.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-07</td>
+        <td>Name Field Accepts Spaces Only</td>
+        <td>Sign Up</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.0s</td>
+        <td>Validation error: Please enter a valid name.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-SU-08</td>
+        <td>Password Field Masking on Sign Up</td>
+        <td>Sign Up</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.2s</td>
+        <td>Input type=password confirmed. Characters masked.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- LOGIN TESTS -->
+<div class="section">
+  <div class="section-title">🔐 Login Test Cases — Suite 2</div>
+  <table>
+    <thead>
+      <tr>
+        <th>TC ID</th><th>Test Scenario</th><th>Module</th><th>Priority</th><th>Status</th><th>Duration</th><th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tc-id">TC-LG-01</td>
+        <td>Successful Login with Valid Credentials</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">6.1s</td>
+        <td>Redirected to dashboard successfully.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-02</td>
+        <td>Login with Incorrect Password</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">4.3s</td>
+        <td>Error: Invalid email or password.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-03</td>
+        <td>Login with Unregistered Email</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">4.0s</td>
+        <td>Error: Account not found.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-04</td>
+        <td>Login with Both Fields Empty</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.8s</td>
+        <td>Validation errors on both fields.</td>
+      </tr>
+      <tr style="background:#fff5f5;">
+        <td class="tc-id">TC-LG-05</td>
+        <td>Login with Invalid Email Format <b style="color:#dc2626">⚠ BUG DR-001</b></td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge fail">❌ FAIL</span></td>
+        <td class="dur-cell">3.6s</td>
+        <td>Only browser HTML5 tooltip shown. No app-level inline validation error. See Defect DR-001.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-06</td>
+        <td>Login with Empty Password</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.6s</td>
+        <td>Validation error: Password is required.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-07</td>
+        <td>Login with Empty Email</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.5s</td>
+        <td>Validation error: Email is required.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-08</td>
+        <td>Password Field Masking on Login Page</td>
+        <td>Login</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">2.1s</td>
+        <td>Input type=password confirmed. Characters masked.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-09</td>
+        <td>Show / Hide Password Toggle</td>
+        <td>Login</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.3s</td>
+        <td>Toggle works: type switches password ↔ text.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-10</td>
+        <td>Forgot Password Link Navigation</td>
+        <td>Login</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.8s</td>
+        <td>Navigated to Forgot Password page correctly.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-11</td>
+        <td>Navigate to Sign Up from Login Page</td>
+        <td>Login</td>
+        <td><span class="badge low">Low</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">3.2s</td>
+        <td>Redirected to Sign Up page successfully.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-12</td>
+        <td>Case-Insensitive Email Login</td>
+        <td>Login</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">5.4s</td>
+        <td>Uppercase email accepted. Login successful.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-13</td>
+        <td>SQL Injection Attempt in Login Fields</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">4.1s</td>
+        <td>Login failed. App did not crash. No data exposed.</td>
+      </tr>
+      <tr>
+        <td class="tc-id">TC-LG-14</td>
+        <td>Successful Logout and Re-Login</td>
+        <td>Login</td>
+        <td><span class="badge high">High</span></td>
+        <td><span class="badge pass">✅ PASS</span></td>
+        <td class="dur-cell">9.7s</td>
+        <td>Session cleared on logout. Re-login successful.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DEFECT REPORT -->
+<div class="section">
+  <div class="section-title">🐛 Defect Report</div>
+  <div class="bug-box">
+    <h3>⚠ 1 Defect Found — DR-001</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Defect ID</th><th>Title</th><th>Module</th><th>Severity</th><th>Priority</th><th>Status</th><th>Linked TC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-id">DR-001</td>
+          <td>Application allows login with invalid email format — no app-level inline validation</td>
+          <td>Login</td>
+          <td><span class="badge high">High</span></td>
+          <td><span class="badge high">High</span></td>
+          <td><span class="badge fail">Open</span></td>
+          <td class="tc-id">TC-LG-05</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px; font-size:13px; line-height:1.8; color:#444;">
+      <b>Description:</b> The Login page does not validate email format at the application level.
+      Inputs like <code>userexample</code> or <code>@example.com</code> only trigger a browser-native HTML5 tooltip — no custom inline error UI is rendered. DevTools Console confirms zero app-level validation errors.<br>
+      <b>Expected:</b> Custom inline error: <i>"Please enter a valid email address."</i> — login request blocked.<br>
+      <b>Actual:</b> Only browser HTML5 tooltip appears. App relies entirely on browser-native validation with no fallback.<br>
+      <b>Suggested Fix:</b> Add JS regex validation on submit and render a styled inline error matching the app's design system (as seen on the Sign Up page).<br>
+      <b>Test Data:</b> <code>userexample</code>, <code>@example.com</code>, <code>user@</code>, <code>user@.com</code>, <code>user@@domain.com</code>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="section">
+  <div class="section-title">📊 Execution Summary</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Total Test Cases</td><td><b>22</b></td></tr>
+      <tr><td>Passed</td><td style="color:#16a34a"><b>21</b></td></tr>
+      <tr><td>Failed</td><td style="color:#dc2626"><b>1</b></td></tr>
+      <tr><td>Skipped</td><td><b>0</b></td></tr>
+      <tr><td>Pass Rate</td><td><b>95.45%</b></td></tr>
+      <tr><td>Total Duration</td><td><b>2 min 38 sec</b></td></tr>
+      <tr><td>High Priority Cases</td><td><b>14</b></td></tr>
+      <tr><td>Medium Priority Cases</td><td><b>7</b></td></tr>
+      <tr><td>Low Priority Cases</td><td><b>1</b></td></tr>
+      <tr><td>Bugs Found</td><td style="color:#dc2626"><b>1 (DR-001)</b></td></tr>
+      <tr><td>Framework</td><td>Selenium WebDriver + TestNG + Maven</td></tr>
+      <tr><td>Browser</td><td>Chrome (Latest)</td></tr>
+      <tr><td>Environment</td><td>Staging</td></tr>
+      <tr><td>Reported By</td><td>Santhoshkumar M</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Tichi Automation Framework — QA Execution Report v1.0 &nbsp;|&nbsp; Generated: 28 June 2026 &nbsp;|&nbsp; Reported by: Santhoshkumar M
+</div>
+
+</body>
+</html>
